@@ -18,8 +18,12 @@ endif
 
 include $(BUILD_SYSTEM)/base_rules.mk
 
+# TODO(porsche): legacy QTI board rules already own these paths. Keep the mkdir
+# module and its install dependency, without emitting a second directory recipe.
+ifeq ($(filter $(LOCAL_SOONG_INSTALL_DIR),$(addprefix $(TARGET_OUT_VENDOR)/,$(QCOM_LEGACY_VENDOR_MOUNTPOINT_NAMES))),)
 $(LOCAL_SOONG_INSTALL_DIR):
 	@mkdir -p $@
+endif
 
 $(LOCAL_BUILT_MODULE): $(LOCAL_SOONG_INSTALL_DIR) $(LOCAL_ADDITIONAL_DEPENDENCIES)
 	@mkdir -p $(dir $@)
