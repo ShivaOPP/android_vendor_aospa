@@ -167,7 +167,7 @@ fi
 if [ "$FLAG_SYNC" = 'y' ]; then
         echo -e "${CLR_BLD_BLU}Downloading the latest source files${CLR_RST}"
         echo -e ""
-        repo sync -j"$JOBS" -c --current-branch --no-tags
+        "$DIR_ROOT/.repo/repo/repo" sync --current-branch --no-tags -j48
 fi
 
 # Check the starting time (of the real build process)
