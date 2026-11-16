@@ -9,6 +9,7 @@ SPDX-FileCopyrightText: 2024 Paranoid Android
 SPDX-License-Identifier: Apache-2.0
 """
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -112,6 +113,12 @@ def grind_beans(device: str) -> list[Element]:
 
 
 def main():
+    # Local ports may use existing Git checkouts instead of Repo-managed projects.
+    # Keep lunch read-only with respect to those repositories when explicitly set.
+    if os.environ.get("AOSPA_SKIP_DEPENDENCIES", "").lower() == "true":
+        print("Using existing device dependencies (AOSPA_SKIP_DEPENDENCIES=true).")
+        return
+
     LOCAL_MANIFESTS_DIR.mkdir(parents=True, exist_ok=True)
 
     if len(sys.argv) <= 1:
@@ -273,12 +280,11 @@ def main():
     if brewable_projects and not skip_sync:
         print("Brewing the fresh ingredients.")
         brew_command = [
-            "repo",
+            str(Path(".repo/repo/repo").resolve()),
             "sync",
-            "--force-sync",
-            "--quiet",
-            "--no-clone-bundle",
+            "--current-branch",
             "--no-tags",
+            "-j48",
         ] + brewable_projects
         try:
             subprocess.run(brew_command, check=True)
