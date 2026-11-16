@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dependencies are managed by .repo/local_manifests/blossom.xml.
+     Keep this recipe empty to avoid registering each project twice. -->
+<manifest />
