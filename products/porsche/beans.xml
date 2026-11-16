@@ -14,4 +14,5 @@
   <project path="device/lineage/sepolicy" name="LineageOS/android_device_lineage_sepolicy" remote="github" revision="lineage-23.2" />
   <project path="hardware/google/pixel" name="LineageOS/android_hardware_google_pixel" remote="github" revision="lineage-23.2" />
   <project name="LineageOS/android_hardware_qcom-caf_common" path="hardware/qcom-caf/common" remote="github" revision="lineage-23.2" />
+  <project name="LineageOS/android_packages_apps_EuiccPolicy" path="hardware/oplus/packages/EuiccPolicy" remote="github" revision="lineage-23.2" />
 </manifest>
